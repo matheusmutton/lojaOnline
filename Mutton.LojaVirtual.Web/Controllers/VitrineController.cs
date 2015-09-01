@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Mutton.LojaVirtual.Web.Models;
 
 namespace Mutton.LojaVirtual.Web.Controllers
 {
@@ -16,15 +17,24 @@ namespace Mutton.LojaVirtual.Web.Controllers
         {
             _reposito = new ProdutosRepositorio();
 
-            //List<Produto> produtos = _reposito.Produtos.Take(10).ToList();
-            var produtos = _reposito.Produtos
+            ProdutosViewModel model = new ProdutosViewModel()
+            {
+                Produtos = _reposito.Produtos
                 .OrderBy(p => p.Nome)
                 //.OrderBy(p => p.Descricao)
                 .Skip((pagina -1) * ProdutosPorPagina)
-                .Take(ProdutosPorPagina);
-            
+                .Take(ProdutosPorPagina),
 
-            return View(produtos);
+                Paginacao = new Paginacao()
+                {
+                    PaginaAtual = pagina,
+                    ItensPorPagina = ProdutosPorPagina,
+                    ItensTotal = _reposito.Produtos.Count()
+                }
+            };
+
+            //return View(produtos);
+            return View(model);
         }
 	}
 }
