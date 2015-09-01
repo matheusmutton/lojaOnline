@@ -18,15 +18,14 @@ namespace Mutton.LojaVirtual.Web.HtmlHelpers
                 TagBuilder tag = new TagBuilder("a");
                 tag.MergeAttribute("href", paginaUrl(i));
                 tag.InnerHtml = i.ToString();
-                tag.AddCssClass("btn-default");
-
+                
                 if (i == paginacao.PaginaAtual)
                 {
                     //se for a página atual, adiciona classes do bootstrap
                     tag.AddCssClass("selected");
                     tag.AddCssClass("btn-primary");
                 }
-
+                tag.AddCssClass("btn btn-default");
                 resultado.Append(tag);
             }
 
