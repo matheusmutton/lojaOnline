@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Web.Mvc;
+using Mutton.LojaVirtual.Web.HtmlHelpers;
+using Mutton.LojaVirtual.Web.Models;
 
 namespace Mutton.LojaVirtual.UnitTest
 {
@@ -30,8 +33,30 @@ namespace Mutton.LojaVirtual.UnitTest
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void TestePaginacaoGeradaCorretamente()
         {
+            //Testando com AAA (arrange, Act, Assert)
+
+            //Arrange (preparação)
+            HtmlHelper html = null;
+            Paginacao paginacao = new Paginacao
+            {
+                PaginaAtual = 2,
+                ItensPorPagina = 10,
+                ItensTotal = 28
+            };
+            Func<int, string> paginaUrl = i => "Pagina" + i;
+
+            //Act (estimular sistema sendo testado)
+            MvcHtmlString resultado = html.PaginacaoLinks(paginacao, paginaUrl);
+
+
+            //Assert (verificar se resultados obtidos = resultados esperados)
+            Assert.AreEqual(
+                @"<a class=""btn-default"" href=""Pagina1"">1</a>" +
+                @"<a class=""btn-primary selected btn-default"" href=""Pagina2"">2</a>" +
+                @"<a class=""btn-default"" href=""Pagina3"">3</a>"
+                , resultado.ToString());
         }
     }
 }
