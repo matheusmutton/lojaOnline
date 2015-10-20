@@ -13,15 +13,15 @@ namespace Mutton.LojaVirtual.Web.Controllers
         private ProdutosRepositorio _reposito;
         public int ProdutosPorPagina = 8;
 
-        public ActionResult ListaProdutos(int pagina = 1)
+        public ActionResult ListaProdutos(string categoria, int pagina = 1)
         {
             _reposito = new ProdutosRepositorio();
 
             ProdutosViewModel model = new ProdutosViewModel()
             {
                 Produtos = _reposito.Produtos
+                .Where(p=> categoria == null || p.Categoria == categoria)
                 .OrderBy(p => p.Nome)
-                //.OrderBy(p => p.Descricao)
                 .Skip((pagina -1) * ProdutosPorPagina)
                 .Take(ProdutosPorPagina),
 
@@ -30,10 +30,11 @@ namespace Mutton.LojaVirtual.Web.Controllers
                     PaginaAtual = pagina,
                     ItensPorPagina = ProdutosPorPagina,
                     ItensTotal = _reposito.Produtos.Count()
-                }
+                },
+
+                CategoriaAtual = categoria
             };
 
-            //return View(produtos);
             return View(model);
         }
 	}
