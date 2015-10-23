@@ -1,6 +1,11 @@
 ﻿@using Mutton.LojaVirtual.Web.HtmlHelpers
 @model Mutton.LojaVirtual.Web.Models.ProdutosViewModel
 
+<div class="btn-group pull-right">
+    @Html.PaginacaoLinks(Model.Paginacao, x => Url.Action("ListaProdutos", new { pagina = x, categoria = Model.CategoriaAtual }))
+</div>
+
+
 @foreach (var p in Model.Produtos)
 {
     @Html.Partial("ProdutoDetalhes",p)

@@ -53,9 +53,9 @@ namespace Mutton.LojaVirtual.UnitTest
 
             //Assert (verificar se resultados obtidos = resultados esperados)
             Assert.AreEqual(
-                @"<a class=""btn-default"" href=""Pagina1"">1</a>" +
-                @"<a class=""btn-primary selected btn-default"" href=""Pagina2"">2</a>" +
-                @"<a class=""btn-default"" href=""Pagina3"">3</a>"
+                @"<a class=""btn btn-default"" href=""Pagina1"">1</a>" +
+                @"<a class=""btn btn-default btn-primary selected"" href=""Pagina2"">2</a>" +
+                @"<a class=""btn btn-default"" href=""Pagina3"">3</a>"
                 , resultado.ToString());
         }
     }
