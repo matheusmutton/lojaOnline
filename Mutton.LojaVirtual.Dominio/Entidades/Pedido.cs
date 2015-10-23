@@ -18,10 +18,14 @@ namespace Mutton.LojaVirtual.Dominio.Entidades
         
         [Required(ErrorMessage = "Informe seu endereço")]
         [Display(Name = "Endereço:")]
-        public string Enredeco { get; set; }
+        public string Endereco { get; set; }
 
         [Display(Name = "Complemento:")]
         public string Complemento { get; set; }
+
+        [Required(ErrorMessage = "Informe seu estado")]
+        [Display(Name = "Estado:")]
+        public string Estado { get; set; }
 
         [Required(ErrorMessage = "Informe sua cidade")]
         [Display(Name = "Cidade:")]

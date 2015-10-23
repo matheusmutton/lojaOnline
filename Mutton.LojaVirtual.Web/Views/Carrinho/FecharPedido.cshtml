@@ -1,0 +1,59 @@
+﻿@model Mutton.LojaVirtual.Dominio.Entidades.Pedido
+
+@{
+    ViewBag.Title = "Fechar Pedido";
+}
+
+<h2>Fechar o pedido</h2>
+
+<p>Digite as informações abaixo</p>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    
+    <h3>Enviar para</h3>
+    <div class="form-group">
+        <label>Nome do cliente:</label>
+        @Html.TextBoxFor(p => p.NomeCliente, new {@class="form-control" })
+    </div>
+    
+    
+    <h3>Dados para entrega</h3>
+    <div class="form-group">
+        <label>CEP:</label>
+        @Html.TextBoxFor(p => p.CEP, new {@class="form-control" })
+    </div>
+    <div class="form-group">
+        <label>Endereço:</label>
+        @Html.TextBoxFor(p => p.Endereco, new {@class="form-control" })
+    </div>
+    <div class="form-group">
+        <label>Complemento:</label>
+        @Html.TextBoxFor(p => p.Complemento, new {@class="form-control" })
+    </div>
+    <div class="form-group">
+        <label>Cidade:</label>
+        @Html.TextBoxFor(p => p.Cidade, new {@class="form-control" })
+    </div>
+    <div class="form-group">
+        <label>Bairro:</label>
+        @Html.TextBoxFor(p => p.Bairro, new {@class="form-control" })
+    </div>
+    <div class="form-group">
+        <label>Estado:</label>
+        @Html.TextBoxFor(p => p.Estado, new {@class="form-control" })
+    </div>
+    <div class="form-group">
+        <label>E-mail:</label>
+        @Html.TextBoxFor(p => p.Email, new {@class="form-control" })
+    </div>
+    
+    <h3>Opções</h3>
+    <div class="checkbox">
+        @Html.EditorFor(p => p.EmbrulhaPresente)
+        Embrulhar para presente?
+    </div>
+    
+    <input class="btn btn-primary" type="submit" value="Fechar o pedido"/>
+}
