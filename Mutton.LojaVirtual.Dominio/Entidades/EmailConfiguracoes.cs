@@ -16,6 +16,5 @@ namespace Mutton.LojaVirtual.Dominio.Entidades
         public string PastaArquivo = @"c:\LojaVirtualEmail";
         public string De = "mutton@muttonlojavirtual.com.br";
         public string Para = "pedido@muttonlojavirtual.com.br";
-
     }
 }
