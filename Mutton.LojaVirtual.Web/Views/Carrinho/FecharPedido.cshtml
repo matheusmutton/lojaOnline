@@ -20,7 +20,21 @@
     
     
     <h3>Dados para entrega</h3>
-    <div class="form-group">
+    
+     foreach (var property in ViewData.ModelMetadata.Properties)
+    {
+        if (property.PropertyName != "NomeCliente" && property.PropertyName != "EmbrulhaPresente")
+        { 
+        <div class="form-group">
+            <label>
+                @(property.DisplayName ?? property.PropertyName)
+            </label>
+            @Html.TextBox(property.PropertyName,null, new {@class="form-control" })
+        </div>
+        }
+    }
+    
+    @*<div class="form-group">
         <label>CEP:</label>
         @Html.TextBoxFor(p => p.CEP, new {@class="form-control" })
     </div>
@@ -44,16 +58,48 @@
         <label>Estado:</label>
         @Html.TextBoxFor(p => p.Estado, new {@class="form-control" })
     </div>
+
     <div class="form-group">
         <label>E-mail:</label>
         @Html.TextBoxFor(p => p.Email, new {@class="form-control" })
     </div>
-    
+*@
     <h3>Opções</h3>
     <div class="checkbox">
-        @Html.EditorFor(p => p.EmbrulhaPresente)
-        Embrulhar para presente?
+        <label>
+            @Html.CheckBoxFor(model => model.EmbrulhaPresente)
+            @Html.DisplayNameFor(model => model.EmbrulhaPresente)
+        </label>
+        @*@Html.EditorFor(p => p.EmbrulhaPresente)
+        Embrulhar para presente?*@
     </div>
     
-    <input class="btn btn-primary" type="submit" value="Fechar o pedido"/>
+    <input class="btn btn-primary" type="submit" value="Fechar o pedido"/>   
 }
+    
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $('#CEP').change(function (e){
+            //prevent post
+            e.preventDefault();
+            //clean fields
+            $('#Endereco').val('');
+            $('#Bairro').val('');
+            $('#Cidade').val('');
+            $('#Estado').val('');            
+
+            var cep = $('#CEP').val().replace("-", "");
+
+            $.getJSON("http://cep.republicavirtual.com.br/web_cep.php?cep=" + cep + "&formato=json", {}, function (data) {
+                if (data.resultado_txt = "sucesso - cep encontrado") {
+                    $('#Endereco').val(data.tipo_logradouro + ' ' + data.logradouro);
+                    $('#Bairro').val(data.bairro);
+                    $('#Cidade').val(data.cidade);
+                    $('#Estado').val(data.uf);
+                }
+
+
+                // "sucesso - cep não encontrado"
+            });
+        });
+    </script>
